@@ -9,7 +9,7 @@
         v-for="option in options"
         :key="option.value"
         @click="handleSelect(option.value)"
-        class="flex items-center gap-2 px-6 py-3 bg-gray-100 text-[#23262A] rounded-xl hover:bg-gray-200 transition-colors text-base focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2 w-fit"
+        class="flex items-center gap-2 px-6 py-3 bg-gray-100 text-[#23262A] rounded-xl hover:bg-gray-200 transition-colors text-base focus:outline-none w-fit"
       >
         <div class="text-[#ED5A29]" v-html="option.icon"></div>
         <span>{{ option.label }}</span>

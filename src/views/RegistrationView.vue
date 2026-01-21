@@ -14,7 +14,7 @@
         <!-- Headlines -->
         <div class="mb-8 text-center">
           <h1 class="text-3xl font-semibold text-[#23262A] mb-3">Everything you need to stop losing customers</h1>
-          <p class="text-sm text-gray-400 font-light">No credit card required. No surprises. Just results.</p>
+          <p class="text-base text-gray-400 font-light">No credit card required. No surprises. Just results.</p>
         </div>
 
         <!-- Form -->
@@ -53,7 +53,7 @@
               placeholder="john@company.com"
               required
             />
-            <p class="text-xs text-gray-400 mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
+            <p class="text-sm text-gray-400 font-light mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
           </div>
 
           <!-- Password -->
@@ -92,7 +92,7 @@
           </button>
 
           <!-- Disclaimer -->
-          <p class="text-xs text-gray-400 text-center">
+          <p class="text-sm text-gray-400 text-center font-light">
             By submitting this form, you agree to the
             <a href="#" class="text-[#ED5A29] hover:underline">Terms of Service</a>
             and
