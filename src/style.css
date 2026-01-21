@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Remove blue outline from focused inputs */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}

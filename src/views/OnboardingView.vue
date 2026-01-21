@@ -1,0 +1,246 @@
+<template>
+  <MainLayout>
+    <template #content>
+      <div class="w-full" @wheel="handleWheel">
+        <transition :name="transitionName" mode="out-in">
+          <div :key="currentStep" class="w-full">
+            <!-- Content -->
+            <div :class="showButtons ? 'mb-6' : ''">
+              <component
+                :is="currentStepComponent"
+                v-model="formData[currentStepKey]"
+                :data="formData"
+                :registration-data="props.registrationData"
+                @auto-next="handleAutoNext"
+              />
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div v-if="showButtons" class="flex justify-start gap-4">
+              <button
+                v-if="!isFirstStep"
+                @click="handlePrev"
+                class="px-6 py-2 border border-gray-300 rounded-lg text-[#23262A] hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+              >
+                Previous
+              </button>
+
+              <button
+                @click="handleNext"
+                class="px-6 py-2 bg-[#ED5A29] text-white rounded-lg hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+              >
+                {{ isLastStep ? 'Complete' : 'Next' }}
+              </button>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </template>
+
+    <template #illustration>
+      <!-- Illustration removed -->
+    </template>
+
+    <template #progress>
+      <div class="flex items-center gap-4">
+        <p class="text-sm text-[#505763] whitespace-nowrap">
+          Step {{ displayStep }} of {{ displayTotalSteps }}
+        </p>
+        <div class="w-[200px] h-2 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
+          <div
+            class="h-full bg-[#ED5A29] transition-all duration-300 ease-in-out"
+            :style="{ width: `${displayProgress}%` }"
+          ></div>
+        </div>
+      </div>
+    </template>
+  </MainLayout>
+</template>
+
+<script setup>
+import { computed, ref, watch, nextTick } from 'vue'
+import { useOnboarding } from '../composables/useOnboarding'
+import MainLayout from '../components/layouts/MainLayout.vue'
+import StepWelcome from '../components/onboarding/StepWelcome.vue'
+import StepReferralSource from '../components/onboarding/StepReferralSource.vue'
+import StepBusinessType from '../components/onboarding/StepBusinessType.vue'
+import StepRelationship from '../components/onboarding/StepRelationship.vue'
+import StepContactType from '../components/onboarding/StepContactType.vue'
+
+const props = defineProps({
+  registrationData: {
+    type: Object,
+    default: null
+  }
+})
+
+const transitionName = ref('slide-up')
+const isScrolling = ref(false)
+const scrollDebounceTimeout = ref(null)
+
+const baseSteps = [
+  { component: StepWelcome, key: 'welcome', showButtons: true },
+  { component: StepReferralSource, key: 'referralSource', showButtons: false },
+  { component: StepBusinessType, key: 'businessType', showButtons: false },
+  { component: StepRelationship, key: 'relationship', showButtons: false }
+]
+
+const contactTypeStep = { component: StepContactType, key: 'contactType', showButtons: false }
+
+const {
+  currentStep,
+  maxReachedStep,
+  formData,
+  isFirstStep,
+  isLastStep,
+  progress,
+  nextStep,
+  prevStep,
+  goToStep,
+  totalSteps,
+  setTotalSteps
+} = useOnboarding(4)
+
+// Dynamic steps based on user selection
+const steps = computed(() => {
+  const allSteps = [...baseSteps]
+  // Add contact type step if user selected "client" in relationship step
+  if (formData.value.relationship?.relationship === 'client') {
+    allSteps.push(contactTypeStep)
+  }
+  return allSteps
+})
+
+// Update total steps for navigation but keep display at 4
+watch(() => formData.value.relationship?.relationship, () => {
+  setTotalSteps(steps.value.length)
+}, { immediate: true })
+
+// Display step number (always max 4 for progress bar)
+const displayStep = computed(() => Math.min(currentStep.value, 4))
+const displayTotalSteps = 4
+const displayProgress = computed(() => (displayStep.value / displayTotalSteps) * 100)
+
+const currentStepComponent = computed(() => {
+  return steps.value[currentStep.value - 1].component
+})
+
+const currentStepKey = computed(() => {
+  return steps.value[currentStep.value - 1].key
+})
+
+const showButtons = computed(() => {
+  return steps.value[currentStep.value - 1].showButtons
+})
+
+const handleNext = () => {
+  transitionName.value = 'slide-up'
+  if (isLastStep.value) {
+    // Handle completion - could navigate to dashboard or show success message
+    console.log('Onboarding completed with data:', formData.value)
+    // You could also emit an event or call an API here
+  } else {
+    nextStep()
+  }
+}
+
+const handlePrev = () => {
+  transitionName.value = 'slide-down'
+  prevStep()
+}
+
+const handleAutoNext = () => {
+  transitionName.value = 'slide-up'
+  // Use nextTick to ensure total steps are updated before navigating
+  // This handles the case when selecting "client" adds a new step
+  nextTick(() => {
+    setTotalSteps(steps.value.length)
+    nextStep()
+  })
+}
+
+const handleWheel = (event) => {
+  // Prevent default scroll behavior
+  event.preventDefault()
+
+  // If already scrolling, ignore this event
+  if (isScrolling.value) {
+    return
+  }
+
+  // Clear any existing timeout
+  if (scrollDebounceTimeout.value) {
+    clearTimeout(scrollDebounceTimeout.value)
+  }
+
+  // Determine scroll direction
+  const delta = event.deltaY
+
+  if (delta > 0) {
+    // Scrolling down - go to next step if available
+    if (currentStep.value < maxReachedStep.value) {
+      transitionName.value = 'slide-up'
+      isScrolling.value = true
+      goToStep(currentStep.value + 1)
+    }
+  } else if (delta < 0) {
+    // Scrolling up - go to previous step
+    if (currentStep.value > 1) {
+      transitionName.value = 'slide-down'
+      isScrolling.value = true
+      goToStep(currentStep.value - 1)
+    }
+  }
+
+  // Set debounce timeout to allow next scroll after 800ms
+  scrollDebounceTimeout.value = setTimeout(() => {
+    isScrolling.value = false
+  }, 800)
+}
+</script>
+
+<style scoped>
+/* Slide Up Transition (going forward) */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.slide-up-enter-to,
+.slide-up-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide Down Transition (going backward) */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.slide-down-enter-to,
+.slide-down-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
