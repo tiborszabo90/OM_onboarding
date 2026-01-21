@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-2xl font-bold text-[#23262A] mb-2">Your Preferences</h2>
+    <h2 class="text-2xl font-normal text-[#23262A] mb-2">Your Preferences</h2>
     <p class="text-[#505763] mb-6">Help us customize your experience</p>
 
     <div class="space-y-6">
@@ -12,14 +12,14 @@
           <label
             v-for="interest in interests"
             :key="interest"
-            class="flex items-center p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer"
+            class="flex items-center p-3 border border-[#D5D8DD] rounded-lg hover:bg-[#F7F7F8] cursor-pointer"
           >
             <input
               type="checkbox"
               :value="interest"
               v-model="localData.interests"
               @change="updateData"
-              class="w-4 h-4 text-[#ED5A29] border-gray-300 rounded focus:ring-[#ED5A29]"
+              class="w-4 h-4 text-[#ED5A29] border-[#D5D8DD] rounded focus:ring-[#ED5A29]"
             />
             <span class="ml-3 text-[#23262A]">{{ interest }}</span>
           </label>
@@ -33,7 +33,7 @@
         <select
           v-model="localData.referralSource"
           @change="updateData"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
+          class="w-full px-4 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
         >
           <option value="">Select an option</option>
           <option value="search">Search Engine</option>

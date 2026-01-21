@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-2xl font-bold text-[#23262A] mb-2">Personal Information</h2>
+    <h2 class="text-2xl font-normal text-[#23262A] mb-2">Personal Information</h2>
     <p class="text-[#505763] mb-6">Tell us a bit about yourself</p>
 
     <div class="space-y-4">
@@ -12,7 +12,7 @@
           type="text"
           v-model="localData.name"
           @input="updateData"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
+          class="w-full px-4 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
           placeholder="Enter your full name"
         />
       </div>
@@ -25,7 +25,7 @@
           type="email"
           v-model="localData.email"
           @input="updateData"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
+          class="w-full px-4 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
           placeholder="your.email@example.com"
         />
       </div>
@@ -38,7 +38,7 @@
           type="tel"
           v-model="localData.phone"
           @input="updateData"
-          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
+          class="w-full px-4 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent text-[#23262A]"
           placeholder="+1 (555) 000-0000"
         />
       </div>

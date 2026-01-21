@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-medium text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
-      <p class="text-base text-gray-400 font-light">Please choose the option which best describes your relationship with {{ websiteName || 'the website' }}.</p>
+      <h2 class="text-lg font-normal text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
+      <p class="text-base text-[#8F97A4] font-normal">Please choose the option which best describes your relationship with {{ websiteName || 'the website' }}.</p>
     </div>
 
     <div class="space-y-4">
@@ -10,7 +10,7 @@
         v-for="option in options"
         :key="option.value"
         @click="handleSelect(option.value)"
-        class="w-full bg-white border-2 border-gray-200 rounded-2xl p-4 hover:border-[#ED5A29] hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2 text-left flex items-center gap-4"
+        class="w-full bg-white border-2 border-[#E3E5E8] rounded-lg p-4 hover:border-[#ED5A29] hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2 text-left flex items-center gap-4"
       >
         <!-- Icon -->
         <div class="text-[#ED5A29] flex-shrink-0">
@@ -19,8 +19,8 @@
 
         <!-- Content -->
         <div>
-          <h3 class="text-base font-medium text-[#23262A] mb-1">{{ option.title }}</h3>
-          <p class="text-sm text-gray-500">{{ option.description }}</p>
+          <h3 class="text-base font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
+          <p class="text-sm text-[#8F97A4]">{{ option.description }}</p>
         </div>
       </button>
     </div>

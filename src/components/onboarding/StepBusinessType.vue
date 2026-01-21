@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-medium text-[#23262A]">What best describes {{ websiteName || 'your business' }}?</h2>
+      <h2 class="text-lg font-normal text-[#23262A]">What best describes {{ websiteName || 'your business' }}?</h2>
     </div>
 
     <div class="flex flex-wrap gap-3">
@@ -9,7 +9,7 @@
         v-for="option in options"
         :key="option.value"
         @click="handleSelect(option.value)"
-        class="flex items-center gap-2 px-6 py-3 bg-gray-100 text-[#23262A] rounded-xl hover:bg-gray-200 transition-colors text-base focus:outline-none w-fit"
+        class="flex items-center gap-2 px-4 py-2 bg-[#F1F2F4] text-[#23262A] rounded-xl hover:bg-[#E3E5E8] transition-colors text-base focus:outline-none w-fit"
       >
         <div class="text-[#ED5A29]" v-html="option.icon"></div>
         <span>{{ option.label }}</span>

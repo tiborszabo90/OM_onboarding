@@ -7,13 +7,13 @@
         </svg>
       </div>
     </div>
-    <h2 class="text-3xl font-bold text-[#23262A] mb-4">All Set!</h2>
+    <h2 class="text-3xl font-normal text-[#23262A] mb-4">All Set!</h2>
     <p class="text-lg text-[#505763] mb-6">
       Your profile has been successfully created. Welcome aboard!
     </p>
 
     <div class="bg-[#FEF3EF] rounded-lg p-6 mb-6">
-      <h3 class="font-semibold text-[#23262A] mb-3">Summary:</h3>
+      <h3 class="font-normal text-[#23262A] mb-3">Summary:</h3>
       <dl class="space-y-2 text-left">
         <div v-if="data.name" class="flex justify-between">
           <dt class="text-[#505763]">Name:</dt>

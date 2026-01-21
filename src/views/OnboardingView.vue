@@ -20,7 +20,7 @@
               <button
                 v-if="!isFirstStep"
                 @click="handlePrev"
-                class="px-6 py-2 border border-gray-300 rounded-lg text-[#23262A] hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+                class="px-6 py-2 border border-[#D5D8DD] rounded-lg text-[#23262A] hover:bg-[#F7F7F8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
               >
                 Previous
               </button>
@@ -46,7 +46,7 @@
         <p class="text-sm text-[#505763] whitespace-nowrap">
           Step {{ displayStep }} of {{ displayTotalSteps }}
         </p>
-        <div class="w-[200px] h-2 bg-gray-200 rounded-full overflow-hidden flex-shrink-0">
+        <div class="w-[200px] h-2 bg-[#E3E5E8] rounded-full overflow-hidden flex-shrink-0">
           <div
             class="h-full bg-[#ED5A29] transition-all duration-300 ease-in-out"
             :style="{ width: `${displayProgress}%` }"

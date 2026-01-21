@@ -2,15 +2,22 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
 
 /* Remove blue outline from focused inputs */
-input:focus,
-select:focus,
-textarea:focus,
 button:focus {
   outline: none;
   box-shadow: none;
+}
+
+/* Double stroke effect for focused inputs */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #F7B59F;
+  box-shadow: 0 0 0 2px #FBD9CE;
 }
 
 /* Placeholder color */

@@ -34,12 +34,12 @@
         <!-- Website name text placeholder -->
         <rect x="90" y="135" width="100" height="10" rx="5"
               class="transition-all duration-500"
-              :class="websiteName ? 'fill-[#23262A]' : 'fill-gray-200'" />
+              :class="websiteName ? 'fill-[#23262A]' : 'fill-[#E3E5E8]'" />
 
         <!-- Website URL placeholder -->
         <rect x="70" y="152" width="140" height="6" rx="3"
               class="transition-all duration-500"
-              :class="websiteUrl ? 'fill-[#ED5A29]/40' : 'fill-gray-100'" />
+              :class="websiteUrl ? 'fill-[#ED5A29]/40' : 'fill-[#F1F2F4]'" />
 
         <!-- Divider line -->
         <line x1="60" y1="175" x2="220" y2="175" stroke="#E5E7EB" stroke-width="1" />
@@ -66,15 +66,15 @@
             <path d="M77 205 L84 201 L84 209 Z" class="fill-purple-500" />
           </g>
           <g v-else class="transition-all duration-300">
-            <rect x="65" y="190" width="30" height="30" rx="6" class="fill-gray-50 stroke-gray-300" stroke-width="1" />
-            <rect x="73" y="198" width="14" height="3" rx="1.5" class="fill-gray-300" />
-            <rect x="73" y="205" width="10" height="3" rx="1.5" class="fill-gray-300" />
+            <rect x="65" y="190" width="30" height="30" rx="6" class="fill-[#F7F7F8] stroke-[#D5D8DD]" stroke-width="1" />
+            <rect x="73" y="198" width="14" height="3" rx="1.5" class="fill-[#D5D8DD]" />
+            <rect x="73" y="205" width="10" height="3" rx="1.5" class="fill-[#D5D8DD]" />
           </g>
 
           <!-- Business type label lines -->
           <rect x="105" y="195" width="80" height="6" rx="3"
-                :class="businessType ? 'fill-[#23262A]/70' : 'fill-gray-200'" />
-          <rect x="105" y="208" width="60" height="4" rx="2" class="fill-gray-100" />
+                :class="businessType ? 'fill-[#23262A]/70' : 'fill-[#E3E5E8]'" />
+          <rect x="105" y="208" width="60" height="4" rx="2" class="fill-[#F1F2F4]" />
         </g>
 
         <!-- Referral source section -->
@@ -119,15 +119,15 @@
 
             <!-- Other/Default icon -->
             <g v-else>
-              <circle cx="80" cy="250" r="8" class="stroke-gray-300" stroke-width="1.5" fill="none" />
-              <circle cx="80" cy="250" r="2" class="fill-gray-300" />
+              <circle cx="80" cy="250" r="8" class="stroke-[#D5D8DD]" stroke-width="1.5" fill="none" />
+              <circle cx="80" cy="250" r="2" class="fill-[#D5D8DD]" />
             </g>
           </g>
 
           <!-- Referral label lines -->
           <rect x="105" y="240" width="70" height="6" rx="3"
-                :class="referralSource ? 'fill-[#23262A]/70' : 'fill-gray-200'" />
-          <rect x="105" y="253" width="50" height="4" rx="2" class="fill-gray-100" />
+                :class="referralSource ? 'fill-[#23262A]/70' : 'fill-[#E3E5E8]'" />
+          <rect x="105" y="253" width="50" height="4" rx="2" class="fill-[#F1F2F4]" />
         </g>
 
         <!-- Relationship indicator badge -->
@@ -154,28 +154,28 @@
       <!-- Floating animated elements -->
       <transition name="float-right">
         <div v-if="currentStep >= 2"
-             class="absolute -right-4 top-1/4 bg-white rounded-xl shadow-lg p-2 border border-gray-100">
+             class="absolute -right-4 top-1/4 bg-white rounded-xl shadow-lg p-2 border border-[#F1F2F4]">
           <div class="flex items-center gap-2">
             <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
               <svg class="w-3 h-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <span class="text-xs text-gray-600 font-medium">Profile</span>
+            <span class="text-xs text-[#8F97A4] font-medium">Profile</span>
           </div>
         </div>
       </transition>
 
       <transition name="float-left">
         <div v-if="businessType"
-             class="absolute -left-2 top-1/2 bg-white rounded-xl shadow-lg p-2 border border-gray-100">
+             class="absolute -left-2 top-1/2 bg-white rounded-xl shadow-lg p-2 border border-[#F1F2F4]">
           <div class="flex items-center gap-1.5">
             <div class="w-5 h-5 rounded-full bg-[#ED5A29]/10 flex items-center justify-center">
               <svg class="w-2.5 h-2.5 text-[#ED5A29]" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
               </svg>
             </div>
-            <span class="text-[10px] text-gray-500">{{ businessTypeLabel }}</span>
+            <span class="text-[10px] text-[#8F97A4]">{{ businessTypeLabel }}</span>
           </div>
         </div>
       </transition>
@@ -254,7 +254,7 @@ const referralBgClass = computed(() => {
     'blog-article': 'fill-[#ED5A29]/5 stroke-[#ED5A29]/30',
     'youtube': 'fill-red-50 stroke-red-300/30',
   }
-  return classes[referralSource.value] || 'fill-gray-50 stroke-gray-200'
+  return classes[referralSource.value] || 'fill-[#F7F7F8] stroke-[#E3E5E8]'
 })
 
 // Relationship badge styling
@@ -264,7 +264,7 @@ const relationshipBadgeClass = computed(() => {
     'company-employee': 'fill-blue-500',
     'client': 'fill-purple-500'
   }
-  return classes[relationship.value] || 'fill-gray-400'
+  return classes[relationship.value] || 'fill-[#8F97A4]'
 })
 
 // Trigger animations when data changes

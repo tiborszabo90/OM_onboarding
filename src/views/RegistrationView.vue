@@ -13,8 +13,8 @@
 
         <!-- Headlines -->
         <div class="mb-8 text-center">
-          <h1 class="text-3xl font-semibold text-[#23262A] mb-3">Everything you need to stop losing customers</h1>
-          <p class="text-base text-gray-400 font-light">No credit card required. No surprises. Just results.</p>
+          <h1 class="text-4xl font-normal text-[#23262A] mb-3">Everything you need to stop losing customers</h1>
+          <p class="text-base text-[#8F97A4] font-normal">No credit card required. No surprises. Just results.</p>
         </div>
 
         <!-- Form -->
@@ -26,7 +26,7 @@
               <input
                 v-model="formData.firstName"
                 type="text"
-                class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
                 placeholder="John"
                 required
               />
@@ -36,7 +36,7 @@
               <input
                 v-model="formData.lastName"
                 type="text"
-                class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
                 placeholder="Doe"
                 required
               />
@@ -49,11 +49,11 @@
             <input
               v-model="formData.email"
               type="email"
-              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
               placeholder="john@company.com"
               required
             />
-            <p class="text-sm text-gray-400 font-light mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
+            <p class="text-sm text-[#8F97A4] font-normal mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
           </div>
 
           <!-- Password -->
@@ -62,7 +62,7 @@
             <input
               v-model="formData.password"
               type="password"
-              class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
               placeholder="Enter your password"
               minlength="8"
               required
@@ -74,7 +74,7 @@
                   v-for="i in 4"
                   :key="i"
                   class="h-1 flex-1 rounded-full transition-colors"
-                  :class="i <= passwordStrength ? strengthColors[passwordStrength] : 'bg-gray-200'"
+                  :class="i <= passwordStrength ? strengthColors[passwordStrength] : 'bg-[#E3E5E8]'"
                 ></div>
               </div>
               <p v-if="formData.password" class="text-xs mt-1.5" :class="strengthTextColors[passwordStrength]">
@@ -92,7 +92,7 @@
           </button>
 
           <!-- Disclaimer -->
-          <p class="text-sm text-gray-400 text-center font-light">
+          <p class="text-sm text-[#8F97A4] text-center font-normal">
             By submitting this form, you agree to the
             <a href="#" class="text-[#ED5A29] hover:underline">Terms of Service</a>
             and
@@ -135,7 +135,7 @@ const passwordStrength = computed(() => {
 })
 
 const strengthColors = {
-  0: 'bg-gray-200',
+  0: 'bg-[#E3E5E8]',
   1: 'bg-red-400',
   2: 'bg-orange-400',
   3: 'bg-yellow-400',
@@ -143,7 +143,7 @@ const strengthColors = {
 }
 
 const strengthTextColors = {
-  0: 'text-gray-400',
+  0: 'text-[#8F97A4]',
   1: 'text-red-500',
   2: 'text-orange-500',
   3: 'text-yellow-600',
