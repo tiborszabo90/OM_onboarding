@@ -1,5 +1,5 @@
 <template>
-  <MainLayout>
+  <MainLayout :has-progress="true">
     <template #content>
       <div class="w-full" @wheel.prevent="handleWheel">
         <transition :name="transitionName" mode="out-in">

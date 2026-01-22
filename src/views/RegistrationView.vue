@@ -9,7 +9,7 @@
         </div>
 
         <!-- Form -->
-        <form @submit.prevent="handleSubmit" class="space-y-5">
+        <form @submit.prevent="handleSubmit" class="space-y-4">
           <!-- Name Row -->
           <div class="flex gap-4">
             <div class="flex-1">
