@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-semibold text-[#23262A] mb-3">Thanks! Please also provide your own contact details</h2>
-      <p class="text-sm text-[#8F97A4] font-normal">You'll receive an email with the option to create an agency account and access all your clients from one account.</p>
+      <h2 class="text-xl font-semibold text-[#23262A] mb-3">Please also provide your own contact details</h2>
+      <p class="text-sm text-[#8F97A4] font-light">You'll receive an email with the option to create an agency account and access all your clients from one account.</p>
     </div>
 
     <div class="space-y-5">
@@ -55,13 +55,13 @@
     <div class="flex items-center gap-4 mt-4">
       <button
         @click="handleSubmit"
-        class="px-6 py-2.5 bg-[#ED5A29] text-white text-sm rounded-xl hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+        class="px-6 py-2.5 bg-[#ED5A29] text-white text-base rounded-xl hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
       >
         Next
       </button>
       <button
         @click="handleSkip"
-        class="btn-text px-6 py-2.5 text-sm text-[#505763] border border-transparent rounded-xl hover:bg-[#F7F7F8] transition-colors"
+        class="btn-text px-6 py-2.5 text-base text-[#505763] border border-transparent rounded-xl hover:bg-[#F7F7F8] transition-colors"
       >
         Skip for now
       </button>

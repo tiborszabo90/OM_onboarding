@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-semibold text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
-      <p class="text-base text-[#8F97A4] font-normal">Please choose the option which best describes your relationship with {{ websiteName || 'the website' }}.</p>
+      <h2 class="text-xl font-semibold text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
+      <p class="text-base text-[#8F97A4] font-light">Please choose the option which best describes your relationship with {{ websiteName || 'the website' }}.</p>
     </div>
 
     <div class="space-y-4">
@@ -24,7 +24,7 @@
 
         <!-- Content -->
         <div>
-          <h3 class="text-sm font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
+          <h3 class="text-base font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
           <p class="text-xs text-[#8F97A4]">{{ option.description }}</p>
         </div>
       </button>

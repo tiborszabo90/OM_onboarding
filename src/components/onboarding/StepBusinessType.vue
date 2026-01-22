@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-semibold text-[#23262A]">What best describes {{ websiteName || 'your business' }}?</h2>
+      <h2 class="text-xl font-semibold text-[#23262A]">What best describes {{ websiteName || 'your business' }}?</h2>
     </div>
 
     <div class="flex flex-wrap gap-3">
@@ -10,7 +10,7 @@
         :key="option.value"
         @click="handleSelect(option.value)"
         :class="[
-          'flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-all text-sm focus:outline-none w-fit',
+          'flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-all text-base focus:outline-none w-fit',
           selectedValue === option.value
             ? 'bg-[#FFF4E9] border-2 border-[#ED5A29] text-[#23262A]'
             : 'bg-transparent border border-[#E3E5E8] text-[#23262A] hover:bg-[#F1F2F4]'
@@ -22,7 +22,7 @@
       <button
         @click="handleOtherClick"
         :class="[
-          'flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-all text-sm focus:outline-none w-fit',
+          'flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-all text-base focus:outline-none w-fit',
           showOtherInput || selectedValue === 'other'
             ? 'bg-[#FFF4E9] border-2 border-[#ED5A29] text-[#23262A]'
             : 'bg-transparent border border-[#E3E5E8] text-[#23262A] hover:bg-[#F1F2F4]'
@@ -58,7 +58,7 @@
           @click="submitOther"
           :disabled="!otherValue.trim()"
           :class="[
-            'mt-4 px-6 py-2.5 rounded-xl transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2',
+            'mt-4 px-6 py-2.5 rounded-xl transition-colors text-base focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2',
             otherValue.trim()
               ? 'bg-[#ED5A29] text-white hover:bg-[#E54D1F] cursor-pointer'
               : 'bg-[#E3E5E8] text-[#505763] cursor-not-allowed'

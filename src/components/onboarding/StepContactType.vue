@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2 class="text-lg font-semibold text-[#23262A] mb-4">Who does this account belong to?</h2>
+      <h2 class="text-xl font-semibold text-[#23262A] mb-4">Who does this account belong to?</h2>
 
       <!-- Profile Card -->
       <div class="bg-[#F7F7F8] rounded-xl p-4">
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <p class="text-sm text-[#8F97A4] font-normal my-6">Select whose contact information was used to create this account.</p>
+      <p class="text-sm text-[#8F97A4] font-light my-6">Select whose contact information was used to create this account.</p>
     </div>
 
     <div class="space-y-3">
