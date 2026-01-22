@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center">
+  <div class="min-h-screen flex items-center justify-center -mt-[100px]">
     <!-- Form Container -->
     <div class="w-full max-w-md px-6">
         <!-- Logo -->
@@ -7,14 +7,8 @@
           <img
             src="https://www.optimonk.com/wp-content/uploads/optimonk-logo-2024.svg"
             alt="OptiMonk"
-            class="h-6 mx-auto"
+            class="h-10 mx-auto"
           />
-        </div>
-
-        <!-- Headlines -->
-        <div class="mb-8 text-center">
-          <h1 class="text-4xl font-normal text-[#23262A] mb-3">Everything you need to stop losing customers</h1>
-          <p class="text-base text-[#8F97A4] font-normal">No credit card required. No surprises. Just results.</p>
         </div>
 
         <!-- Form -->
@@ -26,7 +20,7 @@
               <input
                 v-model="formData.firstName"
                 type="text"
-                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
                 placeholder="John"
                 required
               />
@@ -36,7 +30,7 @@
               <input
                 v-model="formData.lastName"
                 type="text"
-                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+                class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
                 placeholder="Doe"
                 required
               />
@@ -49,7 +43,7 @@
             <input
               v-model="formData.email"
               type="email"
-              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
               placeholder="john@company.com"
               required
             />
@@ -62,7 +56,7 @@
             <input
               v-model="formData.password"
               type="password"
-              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+              class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
               placeholder="Enter your password"
               minlength="8"
               required
@@ -86,7 +80,7 @@
           <!-- Submit Button -->
           <button
             type="submit"
-            class="w-full py-3 bg-[#ED5A29] text-white font-medium rounded-lg hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+            class="w-full py-3 bg-[#ED5A29] text-white font-medium rounded-xl hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
           >
             Get Started
           </button>

@@ -17,24 +17,11 @@
           type="url"
           v-model="localData.websiteUrl"
           @input="updateData"
-          class="w-full px-3 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
+          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-sm text-[#23262A] placeholder:text-sm"
           placeholder="https://example.com"
         />
       </div>
 
-      <!-- Question 2: Website Name -->
-      <div>
-        <label class="block text-lg font-normal text-[#23262A] mb-2">
-          What's the name of this website?
-        </label>
-        <input
-          type="text"
-          v-model="localData.websiteName"
-          @input="updateData"
-          class="w-full px-3 py-2 border border-[#D5D8DD] rounded-lg focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
-          placeholder="My Store"
-        />
-      </div>
     </div>
   </div>
 </template>
@@ -52,8 +39,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const localData = reactive({
-  websiteUrl: props.modelValue.websiteUrl || '',
-  websiteName: props.modelValue.websiteName || ''
+  websiteUrl: props.modelValue.websiteUrl || ''
 })
 
 const updateData = () => {

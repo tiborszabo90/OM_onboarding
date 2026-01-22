@@ -5,7 +5,7 @@
         <transition :name="transitionName" mode="out-in">
           <div :key="currentStep" class="w-full">
             <!-- Content -->
-            <div :class="showButtons ? 'mb-6' : ''">
+            <div :class="showButtons ? 'mb-4' : ''">
               <component
                 :is="currentStepComponent"
                 v-model="formData[currentStepKey]"
@@ -20,14 +20,14 @@
               <button
                 v-if="!isFirstStep"
                 @click="handlePrev"
-                class="px-6 py-2 border border-[#D5D8DD] rounded-lg text-[#23262A] hover:bg-[#F7F7F8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+                class="px-6 py-2.5 border border-[#D5D8DD] rounded-xl text-sm text-[#23262A] hover:bg-[#F7F7F8] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
               >
                 Previous
               </button>
 
               <button
                 @click="handleNext"
-                class="px-6 py-2 bg-[#ED5A29] text-white rounded-lg hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
+                class="px-6 py-2.5 bg-[#ED5A29] text-white text-sm rounded-xl hover:bg-[#E54D1F] transition-colors focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2"
               >
                 {{ isLastStep ? 'Complete' : 'Next' }}
               </button>
@@ -61,11 +61,13 @@
 import { computed, ref, watch, nextTick } from 'vue'
 import { useOnboarding } from '../composables/useOnboarding'
 import MainLayout from '../components/layouts/MainLayout.vue'
+import OnboardingAnimation from '../components/illustrations/OnboardingAnimation.vue'
 import StepWelcome from '../components/onboarding/StepWelcome.vue'
 import StepReferralSource from '../components/onboarding/StepReferralSource.vue'
 import StepBusinessType from '../components/onboarding/StepBusinessType.vue'
 import StepRelationship from '../components/onboarding/StepRelationship.vue'
 import StepContactType from '../components/onboarding/StepContactType.vue'
+import StepAgencyDetails from '../components/onboarding/StepAgencyDetails.vue'
 
 const props = defineProps({
   registrationData: {
@@ -86,6 +88,7 @@ const baseSteps = [
 ]
 
 const contactTypeStep = { component: StepContactType, key: 'contactType', showButtons: false }
+const agencyDetailsStep = { component: StepAgencyDetails, key: 'agencyDetails', showButtons: false }
 
 const {
   currentStep,
@@ -107,12 +110,16 @@ const steps = computed(() => {
   // Add contact type step if user selected "client" in relationship step
   if (formData.value.relationship?.relationship === 'client') {
     allSteps.push(contactTypeStep)
+    // Add agency details step if user selected "client-contact" in contact type step
+    if (formData.value.contactType?.contactType === 'client-contact') {
+      allSteps.push(agencyDetailsStep)
+    }
   }
   return allSteps
 })
 
 // Update total steps for navigation but keep display at 4
-watch(() => formData.value.relationship?.relationship, () => {
+watch([() => formData.value.relationship?.relationship, () => formData.value.contactType?.contactType], () => {
   setTotalSteps(steps.value.length)
 }, { immediate: true })
 
@@ -158,6 +165,30 @@ const handleAutoNext = () => {
     nextStep()
   })
 }
+
+// Expose for DevNavBar
+const totalStepsCount = computed(() => steps.value.length)
+
+const devGoToStep = (step) => {
+  // Allow navigation to any step for dev purposes
+  if (step > currentStep.value) {
+    transitionName.value = 'slide-up'
+  } else {
+    transitionName.value = 'slide-down'
+  }
+  // Update maxReachedStep to allow navigation
+  if (step > maxReachedStep.value) {
+    maxReachedStep.value = step
+  }
+  setTotalSteps(Math.max(steps.value.length, step))
+  goToStep(step)
+}
+
+defineExpose({
+  currentStep,
+  totalStepsCount,
+  devGoToStep
+})
 
 const handleWheel = (event) => {
   // Prevent default scroll behavior

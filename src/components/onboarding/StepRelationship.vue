@@ -10,7 +10,12 @@
         v-for="option in options"
         :key="option.value"
         @click="handleSelect(option.value)"
-        class="w-full bg-white border-2 border-[#E3E5E8] rounded-lg p-4 hover:border-[#ED5A29] hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2 text-left flex items-center gap-4"
+        :class="[
+          'w-full bg-white rounded-xl p-4 transition-all focus:outline-none text-left flex items-center gap-4',
+          selectedValue === option.value
+            ? 'border-2 border-[#ED5A29] shadow-md'
+            : 'border-2 border-[#E3E5E8] hover:border-[#ED5A29] hover:shadow-md'
+        ]"
       >
         <!-- Icon -->
         <div class="text-[#ED5A29] flex-shrink-0">
@@ -19,8 +24,8 @@
 
         <!-- Content -->
         <div>
-          <h3 class="text-base font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
-          <p class="text-sm text-[#8F97A4]">{{ option.description }}</p>
+          <h3 class="text-sm font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
+          <p class="text-xs text-[#8F97A4]">{{ option.description }}</p>
         </div>
       </button>
     </div>
@@ -42,6 +47,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'auto-next'])
+
+// Get selected value from modelValue to persist selection when navigating back
+const selectedValue = computed(() => props.modelValue?.relationship || null)
 
 const websiteName = computed(() => {
   return props.data?.welcome?.websiteName || ''

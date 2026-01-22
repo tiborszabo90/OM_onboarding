@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="mb-8">
+    <div>
       <h2 class="text-lg font-normal text-[#23262A] mb-4">Whose contact have you registered this account with?</h2>
 
       <!-- Profile Card -->
-      <div class="bg-[#F7F7F8] rounded-xl p-4 mb-3">
+      <div class="bg-[#F7F7F8] rounded-xl p-4">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 bg-[#ED5A29] rounded-full flex items-center justify-center text-white font-medium">
             {{ userInitials }}
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <p class="text-base text-[#8F97A4] font-normal mt-4">Select whose contact information was used to create this account.</p>
+      <p class="text-sm text-[#8F97A4] font-normal my-6">Select whose contact information was used to create this account.</p>
     </div>
 
     <div class="space-y-3">
@@ -24,10 +24,15 @@
         v-for="option in options"
         :key="option.value"
         @click="handleSelect(option.value)"
-        class="w-full bg-white border-2 border-[#E3E5E8] rounded-lg p-4 hover:border-[#ED5A29] hover:shadow-md transition-all focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:ring-offset-2 text-left"
+        :class="[
+          'w-full bg-white rounded-xl p-4 transition-all focus:outline-none text-left',
+          selectedValue === option.value
+            ? 'border-2 border-[#ED5A29] shadow-md'
+            : 'border-2 border-[#E3E5E8] hover:border-[#ED5A29] hover:shadow-md'
+        ]"
       >
         <h3 class="text-base font-normal text-[#23262A] mb-1">{{ option.title }}</h3>
-        <p class="text-sm text-[#8F97A4]">{{ option.description }}</p>
+        <p class="text-xs text-[#8F97A4]">{{ option.description }}</p>
       </button>
     </div>
   </div>
@@ -52,6 +57,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'auto-next'])
+
+// Get selected value from modelValue to persist selection when navigating back
+const selectedValue = computed(() => props.modelValue?.contactType || null)
 
 // Get user data from registration
 const userName = computed(() => {
