@@ -13,7 +13,7 @@
           <input
             v-model="localData.firstName"
             type="text"
-            class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-sm text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
+            class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
             placeholder="First name"
           />
         </div>
@@ -22,7 +22,7 @@
           <input
             v-model="localData.lastName"
             type="text"
-            class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-sm text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
+            class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
             placeholder="Last name"
           />
         </div>
@@ -34,7 +34,7 @@
         <input
           v-model="localData.email"
           type="email"
-          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-sm text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
+          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
           placeholder="Email address"
         />
       </div>
@@ -45,7 +45,7 @@
         <input
           v-model="localData.agencyName"
           type="text"
-          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-sm text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
+          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl text-[#23262A] placeholder-[#8F97A4] focus:outline-none focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent"
           placeholder="Super Agency"
         />
       </div>

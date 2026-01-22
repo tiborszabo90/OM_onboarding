@@ -10,14 +10,14 @@
     <div class="space-y-5">
       <!-- Question 1: Website URL -->
       <div>
-        <label class="block text-xl font-semibold text-[#23262A] mb-2">
+        <label class="block text-xl font-semibold text-[#23262A] mb-3">
           Which website would you like to optimize?
         </label>
         <input
           type="url"
           v-model="localData.websiteUrl"
           @input="updateData"
-          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-sm text-[#23262A] placeholder:text-sm"
+          class="w-full px-3 py-2.5 border border-[#D5D8DD] rounded-xl focus:ring-2 focus:ring-[#ED5A29] focus:border-transparent transition-colors text-[#23262A]"
           placeholder="https://example.com"
         />
       </div>
