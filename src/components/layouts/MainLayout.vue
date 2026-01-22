@@ -5,7 +5,7 @@
       <img
         src="https://www.optimonk.com/wp-content/uploads/optimonk-logo-2024.svg"
         alt="OptiMonk"
-        class="h-6"
+        class="h-8"
       />
     </div>
 
