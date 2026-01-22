@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-12">
-      <h2 class="text-4xl font-normal text-[#23262A] mb-4 font-headline">Welcome to OptiMonk 🙌</h2>
+      <h2 class="text-5xl font-normal text-[#23262A] mb-4 font-headline">Welcome to OptiMonk 🙌</h2>
       <p class="text-base text-[#8F97A4] max-w-[400px] font-normal">
         Let's begin with a few questions to help you get started with OptiMonk.
       </p>

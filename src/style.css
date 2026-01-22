@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme {
+  --text-5xl: 2.5rem;
+  --text-5xl--line-height: 1.2;
+}
+
 body {
   font-family: 'Funnel Sans', sans-serif;
   font-weight: 400;

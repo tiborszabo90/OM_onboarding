@@ -12,7 +12,7 @@
     <!-- Main content area -->
     <div class="w-full max-w-300 mx-auto flex-1 flex flex-col md:flex-row md:gap-[100px] overflow-auto pb-16">
       <!-- Left Side - Content Area -->
-      <div class="w-full md:w-[496px] flex items-center justify-center p-8 lg:pl-16 lg:pr-0 pt-0 pb-0 bg-white overflow-hidden">
+      <div class="w-full md:w-[516px] flex items-center justify-center p-8 lg:pl-16 lg:pr-0 pt-0 pb-0 bg-white overflow-hidden">
         <div class="w-full">
           <slot name="content"></slot>
         </div>
@@ -40,7 +40,7 @@
     <!-- Progress bar at bottom of viewport - fixed position, above DevNavBar -->
     <div class="fixed bottom-12 left-0 right-0 bg-white z-40">
       <div class="w-full max-w-300 mx-auto px-8 lg:pl-16 lg:pr-0 py-4">
-        <div class="md:w-[496px]">
+        <div class="md:w-[516px]">
           <slot name="progress"></slot>
         </div>
       </div>
