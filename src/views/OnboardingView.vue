@@ -38,14 +38,11 @@
     </template>
 
     <template #illustration>
-      <div class="aspect-square w-full max-w-[400px]">
-        <video
-          src="/Monk_Animation_With_Specific_Settings.mp4"
-          autoplay
-          loop
-          muted
-          playsinline
-          class="w-full h-full object-cover rounded-[20px]"
+      <div class="w-full h-full">
+        <img
+          src="/monk1.png"
+          alt="OptiMonk Mascot"
+          class="w-full h-full object-contain"
         />
       </div>
     </template>

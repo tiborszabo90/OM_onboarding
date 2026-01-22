@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="mb-12">
-      <h2 class="text-4xl font-normal text-[#23262A] mb-4">Welcome to OptiMonk 🙌</h2>
-      <p class="text-xl text-[#8F97A4] max-w-[400px] font-normal">
+      <h2 class="text-4xl font-normal text-[#23262A] mb-4 font-headline">Welcome to OptiMonk 🙌</h2>
+      <p class="text-base text-[#8F97A4] max-w-[400px] font-normal">
         Let's begin with a few questions to help you get started with OptiMonk.
       </p>
     </div>
@@ -10,7 +10,7 @@
     <div class="space-y-5">
       <!-- Question 1: Website URL -->
       <div>
-        <label class="block text-lg font-normal text-[#23262A] mb-2">
+        <label class="block text-lg font-semibold text-[#23262A] mb-2">
           Which website would you like to optimize?
         </label>
         <input

@@ -1,16 +1,7 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center -mt-[100px]">
-    <!-- Form Container -->
-    <div class="w-full max-w-md px-6">
-        <!-- Logo -->
-        <div class="mb-10 text-center">
-          <img
-            src="https://www.optimonk.com/wp-content/uploads/optimonk-logo-2024.svg"
-            alt="OptiMonk"
-            class="h-10 mx-auto"
-          />
-        </div>
-
+  <MainLayout>
+    <template #content>
+      <div class="w-full">
         <!-- Form -->
         <form @submit.prevent="handleSubmit" class="space-y-5">
           <!-- Name Row -->
@@ -93,12 +84,24 @@
             <a href="#" class="text-[#ED5A29] hover:underline">Privacy Policy</a>.
           </p>
         </form>
-    </div>
-  </div>
+      </div>
+    </template>
+
+    <template #illustration>
+      <div class="w-full h-full">
+        <img
+          src="/monk1.png"
+          alt="OptiMonk Mascot"
+          class="w-full h-full object-contain"
+        />
+      </div>
+    </template>
+  </MainLayout>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import MainLayout from '../components/layouts/MainLayout.vue'
 
 const emit = defineEmits(['complete'])
 

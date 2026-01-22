@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h2 class="text-lg font-normal text-[#23262A] mb-4">Whose contact have you registered this account with?</h2>
+      <h2 class="text-lg font-semibold text-[#23262A] mb-4">Whose contact have you registered this account with?</h2>
 
       <!-- Profile Card -->
       <div class="bg-[#F7F7F8] rounded-xl p-4">

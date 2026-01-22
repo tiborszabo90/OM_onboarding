@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-normal text-[#23262A] mb-3">Thanks! Please also provide your own contact details</h2>
+      <h2 class="text-lg font-semibold text-[#23262A] mb-3">Thanks! Please also provide your own contact details</h2>
       <p class="text-sm text-[#8F97A4] font-normal">You'll receive an email with the option to create an agency account and access all your clients from one account.</p>
     </div>
 

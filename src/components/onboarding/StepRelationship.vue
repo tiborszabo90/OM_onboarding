@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-normal text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
+      <h2 class="text-lg font-semibold text-[#23262A] mb-3">Who are you optimizing this website for?</h2>
       <p class="text-base text-[#8F97A4] font-normal">Please choose the option which best describes your relationship with {{ websiteName || 'the website' }}.</p>
     </div>
 

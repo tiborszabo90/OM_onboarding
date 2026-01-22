@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8">
-      <h2 class="text-lg font-normal text-[#23262A]">How did you hear about us?</h2>
+      <h2 class="text-lg font-semibold text-[#23262A]">How did you hear about us?</h2>
     </div>
 
     <div class="flex flex-wrap gap-3">
@@ -12,7 +12,7 @@
         :class="[
           'px-4 py-2.5 rounded-xl transition-all text-sm focus:outline-none w-fit',
           selectedValue === option.value
-            ? 'bg-[#F1F2F4] border-2 border-[#ED5A29] text-[#23262A]'
+            ? 'bg-[#FFF4E9] border-2 border-[#ED5A29] text-[#23262A]'
             : 'bg-transparent border border-[#E3E5E8] text-[#23262A] hover:bg-[#F1F2F4]'
         ]"
       >
@@ -23,7 +23,7 @@
         :class="[
           'px-4 py-2.5 rounded-xl transition-all text-sm focus:outline-none w-fit',
           showOtherInput || selectedValue === 'other'
-            ? 'bg-[#F1F2F4] border-2 border-[#ED5A29] text-[#23262A]'
+            ? 'bg-[#FFF4E9] border-2 border-[#ED5A29] text-[#23262A]'
             : 'bg-transparent border border-[#E3E5E8] text-[#23262A] hover:bg-[#F1F2F4]'
         ]"
       >

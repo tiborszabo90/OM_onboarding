@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen bg-white flex flex-col relative">
-    <!-- Logo at top -->
-    <div class="w-full max-w-300 mx-auto px-8 lg:px-16 pt-6 flex-shrink-0">
+    <!-- Logo at top left corner -->
+    <div class="fixed top-6 left-8 z-50">
       <img
         src="https://www.optimonk.com/wp-content/uploads/optimonk-logo-2024.svg"
         alt="OptiMonk"
@@ -20,7 +20,7 @@
 
       <!-- Right Side - Illustration Area -->
       <div class="w-full md:w-[calc(45%-100px)] min-h-[50vh] flex items-center justify-end pt-5 pb-[60px]">
-        <div class="w-full max-w-lg h-full rounded-[40px] p-10 flex items-center justify-center bg-[#FFF4E9] translate-x-[100px]">
+        <div class="w-full max-w-xl h-full rounded-[40px] flex items-center justify-center bg-[#FFEFE5] translate-x-[100px] overflow-hidden">
           <slot name="illustration">
             <!-- Default placeholder -->
             <div class="flex items-center justify-center">
