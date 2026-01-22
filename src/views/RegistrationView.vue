@@ -4,12 +4,12 @@
       <div class="w-full">
         <!-- Header -->
         <div class="mb-8">
-          <h1 class="text-5xl font-normal text-[#23262A] mb-3">Everything you need to stop losing customers</h1>
+          <h1 class="text-5xl font-normal text-[#23262A] mb-3 heading-responsive">Everything you need to stop losing customers</h1>
           <p class="text-base text-[#8F97A4] font-normal">No credit card required. No surprises. Just results.</p>
         </div>
 
         <!-- Form -->
-        <form @submit.prevent="handleSubmit" class="space-y-4">
+        <form @submit.prevent="handleSubmit" class="space-y-3">
           <!-- Name Row -->
           <div class="flex gap-4">
             <div class="flex-1">
@@ -44,7 +44,7 @@
               placeholder="john@company.com"
               required
             />
-            <p class="text-sm text-[#8F97A4] font-normal mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
+            <p class="text-xs text-[#8F97A4] font-normal mt-1.5">You'll receive important alerts and notifications about your account and popups.</p>
           </div>
 
           <!-- Password -->

@@ -30,8 +30,8 @@ textarea:focus {
   color: #B9BEC6;
 }
 
-/* Button hover effects (not for disabled) */
-button:not(:disabled):hover {
+/* Button hover effects (not for disabled, not for text-only buttons) */
+button:not(:disabled):not(.btn-text):hover {
   box-shadow: 0 4px 14px rgba(237, 90, 41, 0.35);
 }
 
@@ -51,4 +51,12 @@ button.bg-transparent:not(:disabled):hover {
 button:disabled {
   cursor: not-allowed;
   box-shadow: none !important;
+}
+
+/* Smaller heading on short viewports and mobile */
+@media (max-height: 720px), (max-width: 767px) {
+  .heading-responsive {
+    font-size: 1.875rem !important; /* text-3xl */
+    line-height: 2.25rem !important;
+  }
 }

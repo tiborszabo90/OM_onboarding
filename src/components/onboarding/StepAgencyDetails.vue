@@ -61,7 +61,7 @@
       </button>
       <button
         @click="handleSkip"
-        class="px-6 py-2.5 text-sm text-[#505763] border border-transparent rounded-xl hover:bg-[#F7F7F8] transition-colors"
+        class="btn-text px-6 py-2.5 text-sm text-[#505763] border border-transparent rounded-xl hover:bg-[#F7F7F8] transition-colors"
       >
         Skip for now
       </button>
