@@ -12,7 +12,7 @@
     <!-- Main content area -->
     <div class="w-full h-full max-w-7xl mx-auto flex flex-col md:flex-row md:gap-16 lg:gap-32 xl:gap-48">
       <!-- Left Side - Content Area -->
-      <div class="w-full h-full md:h-auto md:w-[516px] flex items-center justify-center md:justify-start px-8 lg:pl-16 lg:pr-0 py-8 overflow-y-auto">
+      <div class="w-full h-full md:h-auto md:w-[516px] flex items-center justify-center md:justify-start px-8 lg:pl-16 lg:pr-0 py-8 overflow-hidden">
         <div class="w-full max-w-[516px] md:max-w-none">
           <slot name="content"></slot>
         </div>
