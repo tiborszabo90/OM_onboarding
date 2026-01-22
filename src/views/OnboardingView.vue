@@ -1,7 +1,7 @@
 <template>
   <MainLayout>
     <template #content>
-      <div class="w-full" @wheel="handleWheel">
+      <div class="w-full" @wheel.prevent="handleWheel">
         <transition :name="transitionName" mode="out-in">
           <div :key="currentStep" class="w-full">
             <!-- Content -->
@@ -191,9 +191,6 @@ defineExpose({
 })
 
 const handleWheel = (event) => {
-  // Prevent default scroll behavior
-  event.preventDefault()
-
   // If already scrolling, ignore this event
   if (isScrolling.value) {
     return
@@ -223,10 +220,10 @@ const handleWheel = (event) => {
     }
   }
 
-  // Set debounce timeout to allow next scroll after 800ms
+  // Set debounce timeout to allow next scroll after transition completes
   scrollDebounceTimeout.value = setTimeout(() => {
     isScrolling.value = false
-  }, 800)
+  }, 600)
 }
 </script>
 

@@ -30,7 +30,8 @@ export function useOnboarding(initialTotalSteps) {
   }
 
   const goToStep = (step) => {
-    if (step >= 1 && step <= maxReachedStep.value) {
+    // Allow navigation backward freely, but forward only up to maxReachedStep
+    if (step >= 1 && (step <= currentStep.value || step <= maxReachedStep.value)) {
       currentStep.value = step
     }
   }
