@@ -18,9 +18,9 @@
         </div>
       </div>
 
-      <!-- Right Side - Illustration Area (45%) -->
-      <div class="w-full md:w-[45%] min-h-[50vh] flex items-center justify-center pt-5 pb-[60px]">
-        <div class="w-full max-w-lg h-full rounded-[40px] p-10 flex items-center justify-center bg-[#FFEFE5]">
+      <!-- Right Side - Illustration Area -->
+      <div class="w-full md:w-[calc(45%-100px)] min-h-[50vh] flex items-center justify-end pt-5 pb-[60px]">
+        <div class="w-full max-w-lg h-full rounded-[40px] p-10 flex items-center justify-center bg-[#FFF4E9] translate-x-[100px]">
           <slot name="illustration">
             <!-- Default placeholder -->
             <div class="flex items-center justify-center">

@@ -38,7 +38,16 @@
     </template>
 
     <template #illustration>
-      <!-- Illustration removed -->
+      <div class="aspect-square w-full max-w-[400px]">
+        <video
+          src="/Monk_Animation_With_Specific_Settings.mp4"
+          autoplay
+          loop
+          muted
+          playsinline
+          class="w-full h-full object-cover rounded-[20px]"
+        />
+      </div>
     </template>
 
     <template #progress>
@@ -61,7 +70,6 @@
 import { computed, ref, watch, nextTick } from 'vue'
 import { useOnboarding } from '../composables/useOnboarding'
 import MainLayout from '../components/layouts/MainLayout.vue'
-import OnboardingAnimation from '../components/illustrations/OnboardingAnimation.vue'
 import StepWelcome from '../components/onboarding/StepWelcome.vue'
 import StepReferralSource from '../components/onboarding/StepReferralSource.vue'
 import StepBusinessType from '../components/onboarding/StepBusinessType.vue'
