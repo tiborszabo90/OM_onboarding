@@ -1,7 +1,7 @@
 <template>
-  <MainLayout :has-progress="true">
+  <MainLayout :has-progress="true" :transparent-illustration="delayedTransparentBg || isWizardStep" :reduced-gap="delayedReducedGap || isWizardStep">
     <template #content>
-      <div class="w-full" @wheel.prevent="handleWheel">
+      <div class="w-full" @wheel="handleWheel">
         <transition :name="transitionName" mode="out-in">
           <div :key="currentStep" class="w-full">
             <!-- Content -->
@@ -12,6 +12,7 @@
                 :data="formData"
                 :registration-data="props.registrationData"
                 @auto-next="handleAutoNext"
+                @skip-to-dashboard="handleSkipToDashboard"
               />
             </div>
 
@@ -39,16 +40,22 @@
 
     <template #illustration>
       <div class="w-full h-full">
-        <img
-          src="/monk1.png"
-          alt="OptiMonk Mascot"
-          class="w-full h-full object-contain"
-        />
+        <transition name="fade-illustration" mode="out-in">
+          <WebsiteScanAnimation v-if="isWizardStep" key="animation" />
+          <img
+            v-else-if="!hideMonkImage"
+            key="image"
+            src="/monk1.png"
+            alt="OptiMonk Mascot"
+            class="w-full h-full object-contain"
+          />
+          <div v-else key="empty"></div>
+        </transition>
       </div>
     </template>
 
     <template #progress>
-      <div class="flex items-center gap-4">
+      <div v-if="!isWizardStep" class="flex items-center gap-4">
         <p class="text-sm text-[#505763] whitespace-nowrap">
           Step {{ displayStep }} of {{ displayTotalSteps }}
         </p>
@@ -73,6 +80,8 @@ import StepBusinessType from '../components/onboarding/StepBusinessType.vue'
 import StepRelationship from '../components/onboarding/StepRelationship.vue'
 import StepContactType from '../components/onboarding/StepContactType.vue'
 import StepAgencyDetails from '../components/onboarding/StepAgencyDetails.vue'
+import StepUseCaseChat from '../components/onboarding/StepUseCaseChat.vue'
+import WebsiteScanAnimation from '../components/illustrations/WebsiteScanAnimation.vue'
 
 const props = defineProps({
   registrationData: {
@@ -94,6 +103,7 @@ const baseSteps = [
 
 const contactTypeStep = { component: StepContactType, key: 'contactType', showButtons: false }
 const agencyDetailsStep = { component: StepAgencyDetails, key: 'agencyDetails', showButtons: false }
+const useCaseChatStep = { component: StepUseCaseChat, key: 'useCaseChat', showButtons: false }
 
 const {
   currentStep,
@@ -120,6 +130,8 @@ const steps = computed(() => {
       allSteps.push(agencyDetailsStep)
     }
   }
+  // Always add use case chat as the final step
+  allSteps.push(useCaseChatStep)
   return allSteps
 })
 
@@ -128,8 +140,8 @@ watch([() => formData.value.relationship?.relationship, () => formData.value.con
   setTotalSteps(steps.value.length)
 }, { immediate: true })
 
-// Display step number (always max 4 for progress bar)
-const displayStep = computed(() => Math.min(currentStep.value, 4))
+// Display step number (always max 5 for progress bar)
+const displayStep = computed(() => Math.min(currentStep.value, 5))
 const displayTotalSteps = 4
 const displayProgress = computed(() => (displayStep.value / displayTotalSteps) * 100)
 
@@ -145,12 +157,49 @@ const showButtons = computed(() => {
   return steps.value[currentStep.value - 1].showButtons
 })
 
+const isWizardStep = computed(() => {
+  return currentStepKey.value === 'useCaseChat'
+})
+
+// Check if next step will be the wizard
+const isNextStepWizard = computed(() => {
+  const nextStepIndex = currentStep.value // next step is currentStep + 1, but array is 0-indexed
+  if (nextStepIndex >= steps.value.length) return false
+  return steps.value[nextStepIndex]?.key === 'useCaseChat'
+})
+
+// Layout state for wizard transition
+const hideMonkImage = ref(false)
+const delayedTransparentBg = ref(false)
+const delayedReducedGap = ref(false)
+
+// When leaving wizard step, reset immediately
+watch(isWizardStep, (newVal) => {
+  if (!newVal) {
+    hideMonkImage.value = false
+    delayedTransparentBg.value = false
+    delayedReducedGap.value = false
+  }
+})
+
 const handleNext = () => {
   transitionName.value = 'slide-up'
   if (isLastStep.value) {
     // Handle completion - could navigate to dashboard or show success message
     console.log('Onboarding completed with data:', formData.value)
     // You could also emit an event or call an API here
+  } else if (isNextStepWizard.value) {
+    // Sequence: monk fades (600ms) -> background fades (500ms) -> step transition
+    hideMonkImage.value = true
+    setTimeout(() => {
+      delayedTransparentBg.value = true
+      setTimeout(() => {
+        nextStep()
+        setTimeout(() => {
+          delayedReducedGap.value = true
+        }, 600)
+      }, 500)
+    }, 600)
   } else {
     nextStep()
   }
@@ -164,11 +213,31 @@ const handlePrev = () => {
 const handleAutoNext = () => {
   transitionName.value = 'slide-up'
   // Use nextTick to ensure total steps are updated before navigating
-  // This handles the case when selecting "client" adds a new step
   nextTick(() => {
     setTotalSteps(steps.value.length)
-    nextStep()
+
+    // If next step is wizard: monk fades -> background fades -> step transition
+    if (isNextStepWizard.value) {
+      hideMonkImage.value = true
+      setTimeout(() => {
+        delayedTransparentBg.value = true
+        setTimeout(() => {
+          nextStep()
+          setTimeout(() => {
+            delayedReducedGap.value = true
+          }, 600)
+        }, 500)
+      }, 600)
+    } else {
+      nextStep()
+    }
   })
+}
+
+const handleSkipToDashboard = () => {
+  console.log('Skipping to dashboard with data:', formData.value)
+  // Navigate to dashboard or emit completion event
+  // For now, just log and complete the onboarding
 }
 
 // Expose for DevNavBar
@@ -196,8 +265,14 @@ defineExpose({
 })
 
 const handleWheel = (event) => {
+  // Don't handle wheel on wizard step to allow normal textarea scrolling
+  if (isWizardStep.value) {
+    return
+  }
+
   // If already scrolling, ignore this event
   if (isScrolling.value) {
+    event.preventDefault()
     return
   }
 
@@ -212,6 +287,7 @@ const handleWheel = (event) => {
   if (delta > 0) {
     // Scrolling down - go to next step if available
     if (currentStep.value < maxReachedStep.value) {
+      event.preventDefault()
       transitionName.value = 'slide-up'
       isScrolling.value = true
       goToStep(currentStep.value + 1)
@@ -219,6 +295,7 @@ const handleWheel = (event) => {
   } else if (delta < 0) {
     // Scrolling up - go to previous step
     if (currentStep.value > 1) {
+      event.preventDefault()
       transitionName.value = 'slide-down'
       isScrolling.value = true
       goToStep(currentStep.value - 1)
@@ -275,5 +352,21 @@ const handleWheel = (event) => {
 .slide-down-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Fade Illustration Transition */
+.fade-illustration-enter-active,
+.fade-illustration-leave-active {
+  transition: opacity 0.6s ease-in-out;
+}
+
+.fade-illustration-enter-from,
+.fade-illustration-leave-to {
+  opacity: 0;
+}
+
+.fade-illustration-enter-to,
+.fade-illustration-leave-from {
+  opacity: 1;
 }
 </style>

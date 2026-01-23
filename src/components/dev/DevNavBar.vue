@@ -15,13 +15,14 @@
     </button>
 
     <div class="flex items-center gap-1 ml-2">
+      <span class="text-xs text-[#8F97A4] mr-1">Onboarding:</span>
       <button
-        v-for="step in totalSteps"
+        v-for="step in 4"
         :key="step"
         @click="$emit('go-to-step', step)"
         :class="[
           'w-8 h-8 text-sm rounded transition-colors flex items-center justify-center',
-          currentView === 'onboarding' && currentStep === step
+          currentView === 'onboarding' && currentStep === step && currentStep <= 4
             ? 'bg-[#ED5A29] text-white'
             : 'bg-[#505763] hover:bg-[#8F97A4]'
         ]"
@@ -30,17 +31,18 @@
       </button>
     </div>
 
+    <span class="text-[#505763] mx-1">|</span>
+
     <button
-      v-if="totalSteps === 5"
-      @click="$emit('go-to-step', 5)"
+      @click="$emit('go-to-step', totalSteps)"
       :class="[
-        'px-3 py-1 text-sm rounded transition-colors ml-1',
-        currentView === 'onboarding' && currentStep === 5
+        'px-3 py-1 text-sm rounded transition-colors',
+        currentView === 'onboarding' && currentStep === totalSteps
           ? 'bg-[#ED5A29] text-white'
           : 'bg-[#505763] hover:bg-[#8F97A4]'
       ]"
     >
-      5 (Client)
+      Wizard
     </button>
   </div>
 </template>

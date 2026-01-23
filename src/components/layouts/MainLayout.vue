@@ -10,7 +10,7 @@
     </div>
 
     <!-- Main content area -->
-    <div class="w-full h-full max-w-7xl mx-auto flex flex-col md:flex-row md:gap-16 lg:gap-32 xl:gap-48">
+    <div :class="['w-full h-full max-w-7xl mx-auto flex flex-col md:flex-row', reducedGap ? 'md:gap-8' : 'md:gap-16 lg:gap-32 xl:gap-48']">
       <!-- Left Side - Content Area -->
       <div class="w-full h-full md:h-auto md:w-[516px] flex items-center justify-center md:justify-start px-8 lg:pl-16 lg:pr-0 py-8 overflow-hidden">
         <div class="w-full max-w-[516px] md:max-w-none">
@@ -20,7 +20,7 @@
 
       <!-- Right Side - Illustration Area -->
       <div :class="['hidden md:flex flex-1 pt-8 pr-8 lg:pr-16', hasProgress ? 'pb-28' : 'pb-8']">
-        <div class="w-full max-w-xl rounded-[40px] flex items-center justify-center bg-[#FFEFE5] overflow-hidden mb-8">
+        <div :class="['w-full rounded-[40px] flex items-center justify-center overflow-hidden mb-8 transition-colors duration-500', transparentIllustration ? 'bg-transparent' : 'bg-[#FFEFE5]', reducedGap ? '' : 'max-w-xl']">
           <slot name="illustration">
             <!-- Default placeholder -->
             <div class="flex items-center justify-center">
@@ -51,6 +51,14 @@
 <script setup>
 defineProps({
   hasProgress: {
+    type: Boolean,
+    default: false
+  },
+  transparentIllustration: {
+    type: Boolean,
+    default: false
+  },
+  reducedGap: {
     type: Boolean,
     default: false
   }
