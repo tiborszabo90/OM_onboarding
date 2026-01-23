@@ -1,5 +1,20 @@
 <template>
-  <MainLayout :has-progress="true" :transparent-illustration="delayedTransparentBg || isWizardStep" :reduced-gap="delayedReducedGap || isWizardStep">
+  <!-- Dashboard Layout for final step -->
+  <DashboardLayout v-if="isDashboardStep">
+    <template #content>
+      <component
+        :is="currentStepComponent"
+        v-model="formData[currentStepKey]"
+        :data="formData"
+        :registration-data="props.registrationData"
+        @auto-next="handleAutoNext"
+        @skip-to-dashboard="handleSkipToDashboard"
+      />
+    </template>
+  </DashboardLayout>
+
+  <!-- Regular Onboarding Layout -->
+  <MainLayout v-else :has-progress="true">
     <template #content>
       <div class="w-full" @wheel="handleWheel">
         <transition :name="transitionName" mode="out-in">
@@ -40,22 +55,16 @@
 
     <template #illustration>
       <div class="w-full h-full">
-        <transition name="fade-illustration" mode="out-in">
-          <WebsiteScanAnimation v-if="isWizardStep" key="animation" />
-          <img
-            v-else-if="!hideMonkImage"
-            key="image"
-            src="/monk1.png"
-            alt="OptiMonk Mascot"
-            class="w-full h-full object-contain"
-          />
-          <div v-else key="empty"></div>
-        </transition>
+        <img
+          src="/monk1.png"
+          alt="OptiMonk Mascot"
+          class="w-full h-full object-contain"
+        />
       </div>
     </template>
 
     <template #progress>
-      <div v-if="!isWizardStep" class="flex items-center gap-4">
+      <div class="flex items-center gap-4">
         <p class="text-sm text-[#505763] whitespace-nowrap">
           Step {{ displayStep }} of {{ displayTotalSteps }}
         </p>
@@ -74,14 +83,14 @@
 import { computed, ref, watch, nextTick } from 'vue'
 import { useOnboarding } from '../composables/useOnboarding'
 import MainLayout from '../components/layouts/MainLayout.vue'
+import DashboardLayout from '../components/layouts/DashboardLayout.vue'
 import StepWelcome from '../components/onboarding/StepWelcome.vue'
 import StepReferralSource from '../components/onboarding/StepReferralSource.vue'
 import StepBusinessType from '../components/onboarding/StepBusinessType.vue'
 import StepRelationship from '../components/onboarding/StepRelationship.vue'
 import StepContactType from '../components/onboarding/StepContactType.vue'
 import StepAgencyDetails from '../components/onboarding/StepAgencyDetails.vue'
-import StepUseCaseChat from '../components/onboarding/StepUseCaseChat.vue'
-import WebsiteScanAnimation from '../components/illustrations/WebsiteScanAnimation.vue'
+import StepDashboard from '../components/onboarding/StepDashboard.vue'
 
 const props = defineProps({
   registrationData: {
@@ -103,7 +112,7 @@ const baseSteps = [
 
 const contactTypeStep = { component: StepContactType, key: 'contactType', showButtons: false }
 const agencyDetailsStep = { component: StepAgencyDetails, key: 'agencyDetails', showButtons: false }
-const useCaseChatStep = { component: StepUseCaseChat, key: 'useCaseChat', showButtons: false }
+const dashboardStep = { component: StepDashboard, key: 'dashboard', showButtons: false }
 
 const {
   currentStep,
@@ -130,8 +139,8 @@ const steps = computed(() => {
       allSteps.push(agencyDetailsStep)
     }
   }
-  // Always add use case chat as the final step
-  allSteps.push(useCaseChatStep)
+  // Always add dashboard as the final step
+  allSteps.push(dashboardStep)
   return allSteps
 })
 
@@ -157,29 +166,8 @@ const showButtons = computed(() => {
   return steps.value[currentStep.value - 1].showButtons
 })
 
-const isWizardStep = computed(() => {
-  return currentStepKey.value === 'useCaseChat'
-})
-
-// Check if next step will be the wizard
-const isNextStepWizard = computed(() => {
-  const nextStepIndex = currentStep.value // next step is currentStep + 1, but array is 0-indexed
-  if (nextStepIndex >= steps.value.length) return false
-  return steps.value[nextStepIndex]?.key === 'useCaseChat'
-})
-
-// Layout state for wizard transition
-const hideMonkImage = ref(false)
-const delayedTransparentBg = ref(false)
-const delayedReducedGap = ref(false)
-
-// When leaving wizard step, reset immediately
-watch(isWizardStep, (newVal) => {
-  if (!newVal) {
-    hideMonkImage.value = false
-    delayedTransparentBg.value = false
-    delayedReducedGap.value = false
-  }
+const isDashboardStep = computed(() => {
+  return currentStepKey.value === 'dashboard'
 })
 
 const handleNext = () => {
@@ -188,18 +176,6 @@ const handleNext = () => {
     // Handle completion - could navigate to dashboard or show success message
     console.log('Onboarding completed with data:', formData.value)
     // You could also emit an event or call an API here
-  } else if (isNextStepWizard.value) {
-    // Sequence: monk fades (600ms) -> background fades (500ms) -> step transition
-    hideMonkImage.value = true
-    setTimeout(() => {
-      delayedTransparentBg.value = true
-      setTimeout(() => {
-        nextStep()
-        setTimeout(() => {
-          delayedReducedGap.value = true
-        }, 600)
-      }, 500)
-    }, 600)
   } else {
     nextStep()
   }
@@ -215,22 +191,7 @@ const handleAutoNext = () => {
   // Use nextTick to ensure total steps are updated before navigating
   nextTick(() => {
     setTotalSteps(steps.value.length)
-
-    // If next step is wizard: monk fades -> background fades -> step transition
-    if (isNextStepWizard.value) {
-      hideMonkImage.value = true
-      setTimeout(() => {
-        delayedTransparentBg.value = true
-        setTimeout(() => {
-          nextStep()
-          setTimeout(() => {
-            delayedReducedGap.value = true
-          }, 600)
-        }, 500)
-      }, 600)
-    } else {
-      nextStep()
-    }
+    nextStep()
   })
 }
 
@@ -265,8 +226,8 @@ defineExpose({
 })
 
 const handleWheel = (event) => {
-  // Don't handle wheel on wizard step to allow normal textarea scrolling
-  if (isWizardStep.value) {
+  // Don't handle wheel on dashboard step
+  if (isDashboardStep.value) {
     return
   }
 
@@ -352,21 +313,5 @@ const handleWheel = (event) => {
 .slide-down-leave-from {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Fade Illustration Transition */
-.fade-illustration-enter-active,
-.fade-illustration-leave-active {
-  transition: opacity 0.6s ease-in-out;
-}
-
-.fade-illustration-enter-from,
-.fade-illustration-leave-to {
-  opacity: 0;
-}
-
-.fade-illustration-enter-to,
-.fade-illustration-leave-from {
-  opacity: 1;
 }
 </style>

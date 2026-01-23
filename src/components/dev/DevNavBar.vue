@@ -42,7 +42,7 @@
           : 'bg-[#505763] hover:bg-[#8F97A4]'
       ]"
     >
-      Wizard
+      Dashboard
     </button>
   </div>
 </template>
